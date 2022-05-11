@@ -2,15 +2,15 @@
 import React,{useState} from 'react'
 import {Container,Row,Col,Button} from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
-import {useLocation} from 'react-router-dom';
+
 import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import DateFnsUtils from '@date-io/date-fns';
+
 import {Form } from 'react-bootstrap'
 const CreateHabit = ({children}) => {
-    const location = useLocation();
+  
     const [name,setName]=useState('')
     const [text,setText]=useState('')
     const history = useNavigate();
@@ -35,9 +35,9 @@ const CreateHabit = ({children}) => {
     {/* go back to previous page just pass -1 in history if want to go forward pass 1 */}
     < Row className='py-2' style={{backgroundColor:'#91B9C5B2'}}>
     
-        <Col className=' float-start'><button onClick={()=>history(-1)} style={{background:'none',border:'none'}} className='my-1 '> {back} </button></Col>
+        <Col className=' float-start'><button onClick={()=>history(-1)} style={{background:'none',border:'none'}} > {back} </button></Col>
         <Col >
-    <h3 style={{marginLeft:'-55px'}}>Add New Habit</h3>
+    <h3 style={{marginLeft:'-55px'}} >Add New Habit</h3>
         </Col>
     </Row>
     <Container  className='mt-3' style={{ height:'80vh'}}> 
