@@ -18,7 +18,11 @@ const habitSchema=mongoose.Schema({
     days: [{
         type: String,
         required:true
-    }]
+    }],
+    text:{
+        type:String,
+        
+    }
         
     
 },{

@@ -6,19 +6,149 @@ import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import DateFnsUtils from '@date-io/date-fns';
+
+
 import {Form } from 'react-bootstrap'
 
+
+
 const Details = ({children}) => {
+
+  const [checked, setChecked] = React.useState(false);
+  const [checkedT, setCheckedT] = React.useState(false);
+  const [checkedTh, setCheckedTh] = React.useState(false);
+  const [checkedF, setCheckedF] = React.useState(false);
+
+  const [checkedFi, setCheckedFi] = React.useState(false);
+
+  const [checkedS, setCheckedS] = React.useState(false);
+
+  const [checkedSe, setCheckedSe] = React.useState(false);
+
     const location = useLocation();
+    // const[checkOne,setCheckOne]=useState('')
+    // const[checkTwo,setCheckTwo]=useState('')
+    // const[checkThree,setCheckThree]=useState('')
+    // const[checkFour,setCheckFour]=useState('')
+    // const[checkFive,setCheckFive]=useState('')
+    // const[checkSix,setCheckSix]=useState('')
+    // const[checkSeven,setCheckSeven]=useState('')
     const [name,setName]=useState(location.state.name)
+    const[days,setDays]=useState([])
+   
     const [text,setText]=useState('')
     const history = useNavigate();
 
     const back = '< Back '
     const [start, setStart] = React.useState();
     const [end, setEnd] = React.useState();
+    // const data = [
+    //   {
+    //     id: "1",
+    //     name: "Monday",
+        
+    //   },
+    //   {
+    //     id: "2",
+    //     name: "Tuesday",
+       
+    //   },
+    //   {
+    //     id: "3",
+    //     name: "Wednesday",
+      
+    //   },
+      // {
+      //   id: "4",
+      //   name: "Thursday",
+       
+      // },
+      // {
+      //   id: "5",
+      //   name: "Friday",
+       
+      // },
+      // {
+      //   id: "6",
+      //   name: "Saturday",
+       
+      // },
+      // {
+      //   id: "7",
+      //   name: "Sunday",
+       
+      // }
+    // ];
 
+    const handleCheck = () => {
+      setChecked(!checked);
+      if(!checked){
+        console.log("checked")
+       
+        
+      days.push('monday')
+      
+       
+        console.log(days)
+      }
+    };
+    const handleCheckO = (event) => {
+      setCheckedT(event.target.checked);
+      if(!checkedT){
+        console.log("checked")
+        
+       days.push('Tuesday')
+       
+        console.log(days)
+      }
+    };
+    const handleCheckT = (event) => {
+      setCheckedTh(event.target.checked);
+      if(!checkedTh){
+        
+       days.push('Wednesday')
+       
+        console.log(days)
+      }
+    };
+    const handleCheckTh = (event) => {
+      setCheckedF(event.target.checked);
+      if(!checkedF){
+        
+       days.push('Thursday')
+       
+        console.log(days)
+      }
+    };
+    const handleCheckF = (event) => {
+      setCheckedFi(event.target.checked);
+      if(!checkedFi){
+        console.log("checked")
+        
+       days.push('Friday')
+       
+        console.log(days)
+      }
+    };
+    const handleCheckFi = (event) => {
+      setCheckedS(event.target.checked);
+      if(!checkedS){
+       
+       days.push('Saturday')
+       
+        console.log(days)
+      }
+    };
+    const handleCheckS = (event) => {
+      setCheckedSe(event.target.checked);
+      if(!checkedSe){
+        console.log("checked")
+        
+       days.push('Sunday')
+       
+        console.log(days)
+      }
+    };
     const handleChange = (newValue) => {
       setStart(newValue);
     
@@ -27,6 +157,11 @@ const Details = ({children}) => {
     const handleDate = (newValue) => {
         setEnd(newValue);
       };
+const submitHandler=()=>{
+  const newDays= [...new Set(days)]
+  console.log(newDays)
+
+}
 
   return (
     <>
@@ -68,10 +203,51 @@ const Details = ({children}) => {
         </LocalizationProvider></Col></Row>
         <Row className='my-3 ' >
             <h5>Frequency:</h5>
-<Row>
+<Row >
+{/* {data.map((item)=>{
+  return(
+    <main className="mb-3 d-flex justify-content-center">
+    <Form style={{height:'15vh'}}> <div key={'inline-checkbox'} >
+    <Form.Check className="mb-3 d-flex justify-content-center"
+        inline
+        // checked={checked}
+        onChange={(e) => {
+       
+          if (e.target.checked) {
+            setDays([
+              ...days,
+              {
+               
+                name: item.name,
+                
+              },
+            ]);
+          } else {
+            // remove from list
+            setDays(
+              days.filter((people) => people.name !== item.name),
+            );
+          }
+          console.log(days)
+        }}
+      
+        label={item.name}
+        name="group1"
+        type='checkbox'
+        id={'inline-checkbox-1'}
+      />
+      </div>
+      </Form>
+    </main>
+  )
+})} */}
+
     <Form style={{height:'15vh'}}> <div key={'inline-checkbox'} className="mb-3">
       <Form.Check
         inline
+        checked={checked}
+      onChange={handleCheck}
+      
         label="M"
         name="group1"
         type='checkbox'
@@ -79,6 +255,9 @@ const Details = ({children}) => {
       />
       <Form.Check
         inline
+        checked={checkedT}
+      onChange={handleCheckO}
+     
         label="T"
         name="group1"
         type='checkbox'
@@ -86,6 +265,8 @@ const Details = ({children}) => {
       />
       <Form.Check
         inline
+        checked={checkedTh}
+        onChange={handleCheckT}
         
         label="W"
         type='checkbox'
@@ -93,28 +274,36 @@ const Details = ({children}) => {
       />
        <Form.Check
         inline
-        
+        checked={checkedF}
+        onChange={handleCheckTh}
+       
         label="Th"
         type='checkbox'
         id={'inline-checkbox-3'}
       />
        <Form.Check
         inline
-        
+        checked={checkedFi}
+        onChange={handleCheckF}
+    
         label="F"
         type='checkbox'
         id={'inline-checkbox-3'}
       />
        <Form.Check
         inline
-        
+        checked={checkedS}
+        onChange={handleCheckFi}
+      
         label="S"
         type='checkbox'
         id={'inline-checkbox-3'}
       />
        <Form.Check
         inline
-        
+        checked={checkedSe}
+        onChange={handleCheckS}
+      
         label="S"
         type='checkbox'
         id={'inline-checkbox-3'}
@@ -137,7 +326,7 @@ const Details = ({children}) => {
            </Row>
         
     </Container>
-   <Button  style={{width:'100vw' , backgroundColor:'grey'}} type='submit'>DONE</Button>
+   <Button  style={{width:'100vw' , backgroundColor:'grey'}} type='submit' onClick={submitHandler}>DONE</Button>
     </>
   )
 }

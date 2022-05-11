@@ -4,7 +4,7 @@ import Habit from '../models/habitModel.js'
 
 const createHabit = asyncHandler( async(req,res)=>{
 
-    const {name, start, end,days}=req.body
+    const {name, start, end,days,text}=req.body
 
   
 
@@ -13,6 +13,7 @@ const createHabit = asyncHandler( async(req,res)=>{
         start,
          end,
          days,
+         text,
     })
     if(habit){
         res.status(201).json({
@@ -20,7 +21,8 @@ const createHabit = asyncHandler( async(req,res)=>{
             name:habit.name,
           start:habit.start,
           end:habit.end,
-          days:habit.days
+          days:habit.days,
+          text:habit.text
             
         })
     }
