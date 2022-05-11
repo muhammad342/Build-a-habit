@@ -7,9 +7,9 @@ const HomeScreen = () => {
   return (  
   <>
  
-  <Row className='d-flex align-items-center my-auto' style={{height:'100vh'} } onClick={()=>history("/FirstPage")}>
-      <Col>  <p className='text-center '>Hye There!</p>
-      <p className='text-center'>Welcome To Build-A-Habit</p></Col>
+  <Row className='d-flex align-items-center my-auto' style={{height:'100vh',backgroundColor:'#2C3A6B'} } onClick={()=>history("/FirstPage")}>
+      <Col style={{color:'white'}}>  <p className='text-center '>Hye There!</p>
+      <p className='text-center' >Welcome To Build-A-Habit</p></Col>
   
      
 

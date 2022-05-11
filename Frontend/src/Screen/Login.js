@@ -7,7 +7,7 @@ const Login = () => {
   return (
     <>
     <Container  >
-        <Row  style={{height:'94vh'}} className='d-flex align-items-center'>
+        <Row  style={{height:'90vh'}} className='d-flex align-items-center'>
             <Col > <Form>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     
@@ -25,7 +25,7 @@ const Login = () => {
         </Row>
       
     </Container>
-    <Button variant="primary" type="submit" style={{width:'100vw' , backgroundColor:'grey'}} onClick={()=>history("/home")} >
+    <Button variant="primary" type="submit" style={{width:'100vw' ,  backgroundColor:'#91B9C5B2',height:'10vh'}} onClick={()=>history("/home")} >
     
     Sign In
     </Button>

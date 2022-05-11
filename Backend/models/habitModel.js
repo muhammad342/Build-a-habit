@@ -7,12 +7,12 @@ const habitSchema=mongoose.Schema({
         required:true
     },
     start:{
-        type:Object,
+        type:Date,
         required:true
        
     },
     end:{
-        type:Object,
+        type:Date,
         required:true
     },
     days: [{

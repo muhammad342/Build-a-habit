@@ -5,11 +5,11 @@ const FirstPage = () => {
     const history = useNavigate();
    
   return (
-    <>
+    <main  style={{ height:'100vh',backgroundColor:"#2C3A6B"}}>
     
      <Container className='d-flex justify-content-center align-items-center flex-column' style={{height:'80vh'}} >
         <Row  >
-            <Col sm={12} >
+            <Col sm={12} style={{color:'white'}} >
             <p>
                 Let's begin with a<br/> fresh start...
             </p>
@@ -21,18 +21,18 @@ const FirstPage = () => {
         <Row>
             
             <Col sm={12} className='d-flex justify-content-center align-items-center flex-column ' >
-            <Button variant="primary" type="submit" style={{width:'80vw' , backgroundColor:'grey'}} onClick={()=>history("/SecondPage")}  className='my-1'>
+            <Button variant="primary" type="submit" style={{width:'80vw' , backgroundColor:'#91B9C5B2'}} onClick={()=>history("/SecondPage")}  className='my-1'>
     
    Follow my suggestions
     </Button>
-    <Button  type="submit" style={{width:'80vw' , backgroundColor:'grey'}} onClick={()=>history("/CreateHabit")} >
+    <Button  type="submit" style={{width:'80vw' , backgroundColor:'#91B9C5B2'}} onClick={()=>history("/CreateHabit")} >
     
   Create your Own
     </Button>
             </Col>
         </Row>
     </Container>
-    </>
+    </main>
   )
 }
 
