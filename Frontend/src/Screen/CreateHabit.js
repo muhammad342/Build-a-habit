@@ -16,6 +16,7 @@ const CreateHabit = ({children}) => {
     const [text,setText]=useState('')
     const [show, setShow] = useState(true);
     const [error,setError]=useState()
+    const[data,setData]=useState()
     const[message,setMessage]=useState()
     const[days,setDays]=useState([])
     const history = useNavigate();
@@ -47,6 +48,7 @@ const CreateHabit = ({children}) => {
           const {data} = await axios.post("/habit/create",{name,start,end,days,text})
           if(data){
             setMessage('Habit is created')
+           setData(data)
           }
         } catch (error) {
           const Err =
@@ -57,6 +59,13 @@ const CreateHabit = ({children}) => {
         }
       
       }
+      if(data){
+        setTimeout(()=>{
+         
+            history("/habitList")
+          
+      },3000)
+    }
   return (
     <>
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -167,6 +176,6 @@ const CreateHabit = ({children}) => {
    <Button  style={{width:'100vw' , backgroundColor:'#91B9C5B2',height:'13vh'}} type='submit' onClick={submitHandler}>DONE</Button>
     </>
   )
-}
+            }
 
 export default CreateHabit

@@ -25,6 +25,7 @@ const Details = ({children}) => {
     const history = useNavigate();
     const[message,setMessage]=useState()
     const back = '< Back '
+    const[data,setData]=useState()
     const [start, setStart] = React.useState();
     const [end, setEnd] = React.useState();
     
@@ -55,6 +56,7 @@ const submitHandler=async()=>{
     const {data} = await axios.post("/habit/create",{name,start,end,days,text})
     if(data){
       setMessage('Habit is created')
+      setData(data)
     }
   } catch (error) {
     const Err =
@@ -66,7 +68,13 @@ const submitHandler=async()=>{
 
 
 }
-
+if(data){
+  setTimeout(()=>{
+   
+      history("/habitList")
+    
+},3000)
+}
   return (
     <>
     <LocalizationProvider dateAdapter={AdapterDateFns}>
