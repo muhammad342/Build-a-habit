@@ -1,6 +1,6 @@
 
 import React,{useState} from 'react'
-import {Container,Row,Col,Button} from 'react-bootstrap'
+import {Container,Row,Col,Button,Alert} from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
 
 import TextField from '@mui/material/TextField';
@@ -14,6 +14,9 @@ const CreateHabit = ({children}) => {
   
     const [name,setName]=useState('')
     const [text,setText]=useState('')
+    const [show, setShow] = useState(true);
+    const [error,setError]=useState()
+    const[message,setMessage]=useState()
     const[days,setDays]=useState([])
     const history = useNavigate();
 
@@ -39,7 +42,19 @@ const CreateHabit = ({children}) => {
         console.log(name)
         console.log(start)
         console.log(end)
-       const {data} = await axios.post("/habit/create",{name,start,end,days,text})
+        setShow(true)
+        try {
+          const {data} = await axios.post("/habit/create",{name,start,end,days,text})
+          if(data){
+            setMessage('Habit is created')
+          }
+        } catch (error) {
+          const Err =
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message;
+          setError(Err)
+        }
       
       }
   return (
@@ -56,6 +71,26 @@ const CreateHabit = ({children}) => {
         </Col>
     </Row>
     <Container  className='mt-3' style={{ height:'80vh'}}> 
+    {show && error && (
+            <Alert
+              variant="danger"
+              style={{ textAlign: "center" }}
+              onClose={() => setShow(false)}
+              dismissible
+            >
+              {error}
+            </Alert>
+          )}
+            {show && message && (
+            <Alert
+              variant="success"
+              style={{ textAlign: "center" }}
+              onClose={() => setShow(false)}
+              dismissible
+            >
+              {message}
+            </Alert>
+          )}
         <Row className='my-3' >
             <Col >
         <TextField className='float-end' style={{width:'60vw'}} id="standard-basic" label="Name" variant="standard" value={name} onChange={(e)=>setName(e.target.value)} />

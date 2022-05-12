@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {Container,Row,Col,Button} from 'react-bootstrap'
+import {Container,Row,Col,Button,Alert} from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
 import {useLocation} from 'react-router-dom';
 import TextField from '@mui/material/TextField';
@@ -17,13 +17,13 @@ const Details = ({children}) => {
   
 
     const location = useLocation();
-  
+    const [show, setShow] = useState(true);
     const [name,setName]=useState(location.state.name)
     const[days,setDays]=useState([])
-   
+   const [error,setError]=useState()
     const [text,setText]=useState('')
     const history = useNavigate();
-
+    const[message,setMessage]=useState()
     const back = '< Back '
     const [start, setStart] = React.useState();
     const [end, setEnd] = React.useState();
@@ -50,7 +50,20 @@ const submitHandler=async()=>{
   console.log(name)
   console.log(start)
   console.log(end)
- const {data} = await axios.post("/habit/create",{name,start,end,days,text})
+  setShow(true)
+  try {
+    const {data} = await axios.post("/habit/create",{name,start,end,days,text})
+    if(data){
+      setMessage('Habit is created')
+    }
+  } catch (error) {
+    const Err =
+    error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message;
+    setError(Err)
+  }
+
 
 }
 
@@ -60,7 +73,7 @@ const submitHandler=async()=>{
       {children}
     </LocalizationProvider>
     {/* go back to previous page just pass -1 in history if want to go forward pass 1 */}
-    <Row className='my-2'>
+    <Row className='py-2' style={{backgroundColor:'#91B9C5B2'}}>
         <Col  >
     <button onClick={()=>history(-1)} style={{background:'none',border:'none'}} className='my-1'> {back} </button>
         </Col>
@@ -68,7 +81,27 @@ const submitHandler=async()=>{
     <h3 style={{marginLeft:'-55px'}}>{name}</h3>
         </Col>
     </Row>
-    <Container  className='mt-3' style={{ height:'86vh'}}>
+    <Container  className='mt-3' style={{ height:'80vh'}}>
+    {show && error && (
+            <Alert
+              variant="danger"
+              style={{ textAlign: "center" }}
+              onClose={() => setShow(false)}
+              dismissible
+            >
+              {error}
+            </Alert>
+          )}
+          {show && message && (
+            <Alert
+              variant="success"
+              style={{ textAlign: "center" }}
+              onClose={() => setShow(false)}
+              dismissible
+            >
+              {message}
+            </Alert>
+          )}
         <Row className='my-3' >
             <Col >
         <TextField className='float-end' style={{width:'60vw'}} id="standard-basic" label="Name" variant="standard" value={name} />
@@ -143,7 +176,7 @@ const submitHandler=async()=>{
            </Row>
         
     </Container>
-   <Button  style={{width:'100vw' , backgroundColor:'grey'}} type='submit' onClick={submitHandler}>DONE</Button>
+   <Button  style={{width:'100vw' , backgroundColor:'#91B9C5B2',height:'13vh'}} type='submit' onClick={submitHandler}>DONE</Button>
     </>
   )
 }
@@ -158,6 +191,3 @@ export default Details
 
 
 
-// export default () => (
-// 
-// );

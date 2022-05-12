@@ -21,7 +21,7 @@ const habitSchema=mongoose.Schema({
     }],
     text:{
         type:String,
-        
+        required:true
     }
         
     
