@@ -16,3 +16,5 @@ app.get("/", (req, res) => {
 app.use("/habit",habitRoutes)
 app.use(errorHandler);
 app.listen(5000, console.log("server is running..."));
+
+// MONGO_URI=mongodb://localhost:27017/BuildAHabit 

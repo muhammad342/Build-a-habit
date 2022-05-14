@@ -9,7 +9,7 @@ const HabitList = () => {
     const [loading,setLoading]=useState(true)
    const [day,setDay]=useState()
 
-
+   const back = '< Back '
     const[data,setData]=useState()
     const today = new Date();
 
@@ -18,31 +18,6 @@ const HabitList = () => {
 
 useEffect( ()=>{
     
-    const check=today.getDay()
-    
-              if(check === 1){
-               setDay('Monday')
-              
-              }
-              else if(check === 2){
-                setDay('Tuesday')
-              }
-              else if(check === 3){
-                setDay('Wednesday')
-              }
-              else if(check === 4){
-                setDay('Thursday')
-              }
-              else if(check === 5){
-                 setDay('Friday')
-              }
-              else if(check === 6){
-                setDay('Saturday')
-                console.log('m')
-              }
-              else{
-               setDay('Sunday')
-              }
    
    
     const getHabitList=async()=>{
@@ -51,8 +26,40 @@ useEffect( ()=>{
     
         try {
             console.log(day)
+            const check=today.getDay()
+    
+            if(check === 1){
+              var now='Monday'
+             setDay('Monday')
             
-                const {data} = await axios.get(`/habit/${day}`)
+            }
+            else if(check === 2){
+               now='Tuesday'
+              setDay('Tuesday')
+            }
+            else if(check === 3){
+               now='Wednesday'
+              setDay('Wednesday')
+            }
+            else if(check === 4){
+               now ='Thursday'
+              setDay('Thursday')
+            }
+            else if(check === 5){
+               now ='Friday'
+               setDay('Friday')
+            }
+            else if(check === 6){
+               now ='Saturday'
+              setDay('Saturday')
+              
+            }
+            else{
+               now = 'Friday'
+             setDay('Sunday')
+            }
+ 
+                const {data} = await axios.get(`/habit/${now}`)
                 if(data){
                
                     setData(data)
@@ -79,12 +86,17 @@ const habitHandler=(id)=>{
 }
   return (
     <> 
-    <Container   style={{backgroundColor:'#91B9C5B2' , position:' sticky ',top: '0',zIndex:'1'}}>
-        <Row className='py-2 mb-2'>
+   
+    <Container   className='py-2 mb-2' style={{backgroundColor:'#91B9C5B2' , position:' sticky ',top: '0',zIndex:'1'}}>
+    
+        <button onClick={()=>history(-1)} style={{background:'none',border:'none'}} className='my-1 '> {back} </button>
+        <Row>
+        
         <Col>  <Navbar  variant="light">
     <Container>
     
     <Nav className="me-auto">
+      
         <Nav.Link onClick={()=>history("/HabitList")}><h6>Daily</h6></Nav.Link>
         <Nav.Link onClick={()=>history("/WeeklyTracker")}>Weekly</Nav.Link>
         <Nav.Link onClick={()=>history("/MonthlyTracker")}>Monthly</Nav.Link>

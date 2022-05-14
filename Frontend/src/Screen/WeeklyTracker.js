@@ -2,12 +2,13 @@ import React,{useEffect,useState} from 'react'
 import { Container,Row,Col,Navbar,Nav,Table } from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineSharp';
+import Tracker from '../Component/Tracker'
+
 
 const WeeklyTracker = () => {
     const history = useNavigate();
     const[data,setData]=useState()
+    const back = '< Back '
     const [loading,setLoading]=useState(true)
 
     useEffect( ()=>{
@@ -15,7 +16,7 @@ const WeeklyTracker = () => {
             try {
                 const {data} = await axios.get("/habit")
                 if(data){
-                   console.log(data)
+                   
                     setData(data)
                     setLoading(false)
                     
@@ -32,6 +33,8 @@ const WeeklyTracker = () => {
   return (
    <>
     <Container   style={{backgroundColor:'#91B9C5B2' , position:' sticky ',top: '0',zIndex:'1'}}>
+      
+    <button onClick={()=>history(-1)} style={{background:'none',border:'none'}} className='my-1 '> {back} </button>
     <Row className='py-2 mb-2'>
         <Col>  <Navbar  variant="light">
     <Container>
@@ -50,46 +53,8 @@ const WeeklyTracker = () => {
   
     <Row >
         
-    <Table >
-  <thead>
-
-    <tr>
-     
-      <th> Name</th>
-      <th>M</th>
-      <th>T</th>
-      <th>W</th>
-      <th>Th</th>
-      <th>F</th>
-      <th>S</th>
-      <th>S</th>
-  
-    </tr>
-  </thead>
-  <tbody>
-      {data && data.map((p,index)=>{
-          const {name,days}=p
-          return(
-    <tr key={index}>
-    <td>{name}</td>
     
-   {days.map((d,index)=>{
-       return(
-    //    <td key={index}>< CheckCircleIcon/></td> 
-    <td key={index}><CheckCircleOutlineSharpIcon/></td>
-       
-       )
-   })}
-   
-    </tr>
-)
-      })}
-      
-      
-    
-  </tbody>
-</Table>
-    
+    <Tracker data={data}/>
     </Row>
 </Container></>
 
