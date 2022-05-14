@@ -43,12 +43,13 @@ const WeeklyTracker = () => {
     </Nav>
     </Container>
   </Navbar></Col>
-        <Col ><h3 className='text-end'>Icon</h3></Col>
+      
     </Row> </Container>
  
 <Container  style={{height:'81vh'}}>
   
     <Row >
+        
     <Table >
   <thead>
 

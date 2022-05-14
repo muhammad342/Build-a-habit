@@ -19,7 +19,7 @@ const HabitList = () => {
 useEffect( ()=>{
     
     const check=today.getDay()
-    console.log(check)
+    
               if(check === 1){
                setDay('Monday')
               
@@ -97,6 +97,7 @@ const habitHandler=(id)=>{
     <Container style={{height:'81vh'}}>
       
         <Row  >
+        <h4 className='text-center'>{day}</h4>
          {loading ?    <CircularProgress /> :  (  data &&  data.length>0 ?  data.map((h)=>{
                 return(
                     <Col key={h._id} xs={12}>
