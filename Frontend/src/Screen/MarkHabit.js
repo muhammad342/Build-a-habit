@@ -8,9 +8,24 @@ const MarkHabit = () => {
     const location = useLocation();
     const[habit,setHabit]=useState()
     const history = useNavigate();
+ 
     const[id,setId]=useState(location.state.id)
-    const submitHandler=()=>{
-        console.log('submitted')
+    const submitHandler=async()=>{
+     
+        const completedOn = new Date();
+       
+        try {
+            const _id=id
+            console.log(_id)
+            
+            const {data} = await axios.put("/habit/completed",{_id,completedOn})
+            if(data){
+                console.log('submitted')
+            }
+        } catch (error) {
+            
+        }
+
     }
   
     useEffect(()=>{
@@ -34,9 +49,9 @@ const MarkHabit = () => {
      <Container className='d-flex justify-content-center align-items-center flex-column' style={{height:'80vh'}} >
         <Row  >
             <Col sm={12} style={{color:'white'}} >
-            <p>
-                Let's begin with a<br/> fresh start...
-            </p>
+            <h4>
+                {habit && habit.name}
+            </h4>
           
             </Col>
             

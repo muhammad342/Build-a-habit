@@ -40,7 +40,7 @@ const updateHabit = asyncHandler(async (req, res) => {
     const habit = await Habit.findById(_id);
   
     if (habit) {
-      user.completedOn = req.body.completedOn || user.completedOn;
+      habit.completedOn = req.body.completedOn || habit.completedOn;
       
      
   

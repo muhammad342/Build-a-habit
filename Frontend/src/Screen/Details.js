@@ -27,6 +27,7 @@ const Details = ({children}) => {
     const back = '< Back '
     const[data,setData]=useState()
     const [start, setStart] = React.useState();
+    const [completedOn, setCompletedOn] = React.useState();
     const [end, setEnd] = React.useState();
     
 
@@ -41,6 +42,7 @@ const Details = ({children}) => {
  
     const handleChange = (newValue) => {
       setStart(newValue);
+      setCompletedOn(newValue)
     
    
     };
@@ -53,7 +55,7 @@ const submitHandler=async()=>{
   console.log(end)
   setShow(true)
   try {
-    const {data} = await axios.post("/habit/create",{name,start,end,days,text})
+    const {data} = await axios.post("/habit/create",{name,start,end,days,text,completedOn})
     if(data){
       setMessage('Habit is created')
       setData(data)
