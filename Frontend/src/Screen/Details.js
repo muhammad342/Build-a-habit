@@ -55,7 +55,7 @@ const submitHandler=async()=>{
   console.log(end)
   setShow(true)
   try {
-    const {data} = await axios.post("/habit/create",{name,start,end,days,text,completedOn})
+    const {data} = await axios.post("/habit/create",{name,start,end,days,text})
     if(data){
       setMessage('Habit is created')
       setData(data)

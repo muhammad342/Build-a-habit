@@ -1,26 +1,77 @@
 import React,{useState,useEffect} from 'react'
 import {Container,Row,Col,ListGroup,Navbar,Nav} from 'react-bootstrap'
 import axios from 'axios'
+import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from "react-router-dom";
 
 const HabitList = () => {
     const history = useNavigate();
+    const [loading,setLoading]=useState(true)
+   const [day,setDay]=useState()
+
+
     const[data,setData]=useState()
+    const today = new Date();
+
+   
+    
+
 useEffect( ()=>{
+    
+    const check=today.getDay()
+    console.log(check)
+              if(check === 1){
+               setDay('Monday')
+              
+              }
+              else if(check === 2){
+                setDay('Tuesday')
+              }
+              else if(check === 3){
+                setDay('Wednesday')
+              }
+              else if(check === 4){
+                setDay('Thursday')
+              }
+              else if(check === 5){
+                 setDay('Friday')
+              }
+              else if(check === 6){
+                setDay('Saturday')
+                console.log('m')
+              }
+              else{
+               setDay('Sunday')
+              }
+   
+   
     const getHabitList=async()=>{
+     
+      
+    
         try {
-            const {data} = await axios.get("/habit")
-            if(data){
+            console.log(day)
+            
+                const {data} = await axios.get(`/habit/${day}`)
+                if(data){
                
-                setData(data)
-            }
+                    setData(data)
+                    setLoading(false)
+    
+                }
+            
+              
+           
+           
         } catch (error) {
             
         }
+       
     }
-    getHabitList()
+  getHabitList()
+  
 
-},[])
+},[day])
 
 const habitHandler=(id)=>{
     
@@ -40,13 +91,13 @@ const habitHandler=(id)=>{
     </Nav>
     </Container>
   </Navbar></Col>
-            <Col ><h3 className='text-end'>Icon</h3></Col>
+            
         </Row> </Container>
      
     <Container style={{height:'81vh'}}>
       
         <Row  >
-            { data && data.map((h)=>{
+         {loading ?    <CircularProgress /> :  (  data &&  data.length>0 ?  data.map((h)=>{
                 return(
                     <Col key={h._id} xs={12}>
 <ListGroup>
@@ -57,8 +108,14 @@ const habitHandler=(id)=>{
 </ListGroup>
                     </Col>
                 )
-            })}
-        
+            }) : <Row>
+                <Col>
+                <h6 className=' text-center'>No habit on this day</h6>
+                </Col>
+            </Row>
+
+  ) 
+        }  
         </Row>
     </Container>
    

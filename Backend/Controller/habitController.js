@@ -37,12 +37,11 @@ const createHabit = asyncHandler( async(req,res)=>{
 
 const updateHabit = asyncHandler(async (req, res) => {
     const {_id}=req.body
-    const habit = await Habit.findById(_id);
-  
+    let habit = await Habit.findById(_id);
+ 
     if (habit) {
-      habit.completedOn = req.body.completedOn || habit.completedOn;
-      
-     
+      habit.completedOn =  [...habit.completedOn,req.body.completedOn] 
+    
   
       const updatedHabit = await habit.save();
   
@@ -81,4 +80,13 @@ const getHabits = asyncHandler( async(req,res)=>{
 })
 
 
-export { getHabits, createHabit,updateHabit,findHabitById}
+const getHabitInDay = asyncHandler( async(req,res)=>{
+  const {day}=req.params
+  const habits = await Habit.find({
+    days:day
+  })
+
+  res.json(habits)
+})
+
+export { getHabits, createHabit,updateHabit,findHabitById,getHabitInDay}

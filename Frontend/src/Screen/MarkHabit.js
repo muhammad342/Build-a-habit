@@ -15,6 +15,7 @@ const MarkHabit = () => {
     const submitHandler=async()=>{
      
         const completedOn = new Date();
+     
        
         try {
             const _id=id

@@ -23,10 +23,10 @@ const habitSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    completedOn:{
+    completedOn:[{
         type:Date,
         
-    },
+    }],
         
     
 },{
