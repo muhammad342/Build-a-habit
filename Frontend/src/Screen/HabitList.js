@@ -1,8 +1,10 @@
 import React,{useState,useEffect} from 'react'
-import {Button,Container,Row,Col,ListGroup,Nav} from 'react-bootstrap'
+import {Container,Row,Col,ListGroup} from 'react-bootstrap'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 const HabitList = () => {
+    const history = useNavigate();
     const[data,setData]=useState()
 useEffect( ()=>{
     const getHabitList=async()=>{
@@ -19,6 +21,11 @@ useEffect( ()=>{
     getHabitList()
 
 },[])
+
+const habitHandler=(id)=>{
+    console.log(id)
+    history('/Completed',{state:{id:id}})
+}
   return (
     <> 
     <Container   style={{backgroundColor:'#91B9C5B2' , position:' sticky ',top: '0',zIndex:'1'}}>
@@ -35,7 +42,8 @@ useEffect( ()=>{
                     <Col key={h._id} xs={12}>
 <ListGroup>
  
-  <ListGroup.Item className='my-2' variant="info">{h.name}</ListGroup.Item>
+  <ListGroup.Item className='my-2' variant="info" onClick={()=>habitHandler(h._id)}>{h.name}
+  </ListGroup.Item>
  
 </ListGroup>
                     </Col>

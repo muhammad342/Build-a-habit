@@ -22,7 +22,11 @@ const habitSchema=mongoose.Schema({
     text:{
         type:String,
         required:true
-    }
+    },
+    completedOn:{
+        type:Date,
+        
+    },
         
     
 },{

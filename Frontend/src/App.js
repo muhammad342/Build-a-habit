@@ -13,6 +13,7 @@ import Happy from './Screen/Happy'
 import Details from './Screen/Details';
 import CreateHabit from './Screen/CreateHabit';
 import HabitList from './Screen/HabitList';
+import MarkHabit from './Screen/MarkHabit';
 
 
 function App({children}) {
@@ -33,6 +34,7 @@ function App({children}) {
         <Route  path='/details' element={<Details/>} />
         <Route  path='/CreateHabit' element={<CreateHabit/>} />
         <Route  path='/habitList' element={<HabitList/>} />
+        <Route  path='/Completed' element={<MarkHabit/>} />
       </Routes>
     </main>
   </Router>

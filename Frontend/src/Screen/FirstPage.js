@@ -29,6 +29,10 @@ const FirstPage = () => {
     
   Create your Own
     </Button>
+    <Button  type="submit" style={{width:'80vw' , backgroundColor:'#91B9C5B2'}} onClick={()=>history("/HabitList")} className='my-1' >
+    
+   Habit Tracker
+      </Button>
             </Col>
         </Row>
     </Container>

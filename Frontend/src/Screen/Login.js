@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form,Button,Container,Row,Col } from 'react-bootstrap'
+import {Form,Button,Container,Row,Col,Image } from 'react-bootstrap'
 import { useNavigate } from "react-router-dom";
 const Login = () => {
     const history = useNavigate();
@@ -7,7 +7,8 @@ const Login = () => {
   return (
     <>
     <Container  >
-        <Row  style={{height:'90vh'}} className='d-flex align-items-center'>
+        <Row  style={{height:'90vh'}} className='d-flex align-items-center '>
+        
             <Col > <Form>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     
