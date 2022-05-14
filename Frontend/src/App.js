@@ -14,6 +14,8 @@ import Details from './Screen/Details';
 import CreateHabit from './Screen/CreateHabit';
 import HabitList from './Screen/HabitList';
 import MarkHabit from './Screen/MarkHabit';
+import WeeklyTracker from './Screen/WeeklyTracker';
+import MonthlyTracker from './Screen/MonthlyTracker';
 
 
 function App({children}) {
@@ -35,6 +37,8 @@ function App({children}) {
         <Route  path='/CreateHabit' element={<CreateHabit/>} />
         <Route  path='/habitList' element={<HabitList/>} />
         <Route  path='/Completed' element={<MarkHabit/>} />
+        <Route  path='/WeeklyTracker' element={<WeeklyTracker/>} />
+        <Route  path='/MonthlyTracker' element={<MonthlyTracker/>} />
       </Routes>
     </main>
   </Router>

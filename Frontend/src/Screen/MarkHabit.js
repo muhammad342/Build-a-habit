@@ -1,12 +1,14 @@
 import React, { useState,useEffect } from 'react'
 import {useLocation} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import {Container,Row,Col,Button} from 'react-bootstrap'
+import {Container,Row,Col,Button,Alert} from 'react-bootstrap'
 import axios from 'axios' 
 
 const MarkHabit = () => {
     const location = useLocation();
     const[habit,setHabit]=useState()
+    const [show, setShow] = useState(true);
+    const[success,setSuccess]=useState(false)
     const history = useNavigate();
  
     const[id,setId]=useState(location.state.id)
@@ -20,7 +22,11 @@ const MarkHabit = () => {
             
             const {data} = await axios.put("/habit/completed",{_id,completedOn})
             if(data){
-                console.log('submitted')
+                setSuccess(true)
+                setTimeout(()=>{
+                    history("/WeeklyTracker")
+                },3000)
+               
             }
         } catch (error) {
             
@@ -45,7 +51,16 @@ const MarkHabit = () => {
      
   return ( 
     <main  style={{ height:'100vh',backgroundColor:"#2C3A6B"}}>
-    
+     {show && success && (
+            <Alert
+              variant="success"
+              style={{ textAlign: "center" }}
+              onClose={() => setShow(false)}
+              dismissible
+            >
+              'Your Habit has been marked as done'
+            </Alert>
+          )}
      <Container className='d-flex justify-content-center align-items-center flex-column' style={{height:'80vh'}} >
         <Row  >
             <Col sm={12} style={{color:'white'}} >

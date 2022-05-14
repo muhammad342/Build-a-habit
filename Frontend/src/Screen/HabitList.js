@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Container,Row,Col,ListGroup} from 'react-bootstrap'
+import {Container,Row,Col,ListGroup,Navbar,Nav} from 'react-bootstrap'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +11,7 @@ useEffect( ()=>{
         try {
             const {data} = await axios.get("/habit")
             if(data){
-                console.log(data)
+               
                 setData(data)
             }
         } catch (error) {
@@ -23,20 +23,29 @@ useEffect( ()=>{
 },[])
 
 const habitHandler=(id)=>{
-    console.log(id)
+    
     history('/Completed',{state:{id:id}})
 }
   return (
     <> 
     <Container   style={{backgroundColor:'#91B9C5B2' , position:' sticky ',top: '0',zIndex:'1'}}>
         <Row className='py-2 mb-2'>
-            <Col><h3>Daily</h3></Col>
+        <Col>  <Navbar  variant="light">
+    <Container>
+    
+    <Nav className="me-auto">
+        <Nav.Link onClick={()=>history("/HabitList")}><h6>Daily</h6></Nav.Link>
+        <Nav.Link onClick={()=>history("/WeeklyTracker")}>Weekly</Nav.Link>
+        <Nav.Link onClick={()=>history("/MonthlyTracker")}>Monthly</Nav.Link>
+    </Nav>
+    </Container>
+  </Navbar></Col>
             <Col ><h3 className='text-end'>Icon</h3></Col>
         </Row> </Container>
      
-    <Container>
+    <Container style={{height:'81vh'}}>
       
-        <Row  style={{height:'81vh'}}>
+        <Row  >
             { data && data.map((h)=>{
                 return(
                     <Col key={h._id} xs={12}>
